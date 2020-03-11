@@ -15,23 +15,28 @@
 
 var seconds = 0;
 
-function not_dupl_() {
+function not_dupl_() 
+{
     return true;
 }
 
-function SecondsPast_() {
-    if (seconds <= totalSecs) {
+function SecondsPast_() 
+{
+    if (seconds <= totalSecs) 
+    {
         document.getElementById('d_t').value = totalSecs - seconds;
         seconds += 1;
     }
-    else {
+    else 
+    {
         seconds = 0;
-        document.getElementById('d_t').value = seconds;
+        document.getElementById('d_t').value = totalSecs - seconds;
     }
     timerId = setTimeout('SecondPast()', 1000);
 }
 
-function init_() {
+function init_() 
+{
     let check = document.getElementsByClassName("b3")[0];
     if (check === undefined)
         return;
@@ -42,4 +47,5 @@ function init_() {
 
 }
 
-window.addEventListener("load", init_);
+init_()
+//window.addEventListener("load", init_);
