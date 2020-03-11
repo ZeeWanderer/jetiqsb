@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         jetiq_soset_bibu
 // @namespace    http://tampermonkey.net/
-// @version      0.1.1
+// @version      0.1.2
 // @description  try to take over the world!
 // @author       You
 // @match        *://test.vntu.edu.ua/*
@@ -22,16 +22,14 @@ function not_dupl_()
 
 function SecondsPast_() 
 {
-    if (seconds <= totalSecs) 
-    {
-        document.getElementById('d_t').value = totalSecs - seconds;
-        seconds += 1;
-    }
-    else 
+    if (seconds > totalSecs) 
     {
         seconds = 0;
-        document.getElementById('d_t').value = totalSecs - seconds;
     }
+
+    document.getElementById('d_t').value = totalSecs - seconds;
+    seconds += 1;
+
     timerId = setTimeout('SecondPast()', 1000);
 }
 
