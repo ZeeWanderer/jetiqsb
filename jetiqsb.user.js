@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         jetiq_soset_bibu
 // @namespace    http://tampermonkey.net/
-// @version      0.1.5
+// @version      0.1.6
 // @description  try to take over the world!
 // @author       You
 // @match        *://test.vntu.edu.ua/*
@@ -33,6 +33,11 @@ function SecondsPast_()
     timerId = setTimeout('SecondPast()', 1000);
 }
 
+function stop_p_(event)
+{
+    event.stopPropagation();
+}
+
 function return_true_(event)
 {
     event.stopPropagation();
@@ -53,10 +58,7 @@ function init_()
     window.addEventListener('paste', return_true_, true)
     window.addEventListener('copy', return_true_, true)
 
-    window.addEventListener('visibilitychange', function (event)
-    {
-        event.stopPropagation();
-    }, true);
+    window.addEventListener('visibilitychange', stop_p_, true);
 }
 
 init_()
