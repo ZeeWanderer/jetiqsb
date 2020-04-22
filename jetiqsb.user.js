@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         jetiq_soset_bibu
 // @namespace    http://tampermonkey.net/
-// @version      0.2.7
+// @version      0.2.8
 // @description  try to take over the world!
 // @author       You
 // @match        *://test.vntu.edu.ua/*
@@ -26,8 +26,8 @@ function remove_cookie(cname)
 // var not_dupl;
 
 // Subst specific vars
-var seconds_ = 0;
-var totalSecs_ = undefined
+let seconds_ = 0;
+let totalSecs_ = undefined
 
 function prepare_for_subst_()
 {
@@ -52,6 +52,21 @@ function SecondsPast_()
     timerId = setTimeout('SecondPast()', 1000);
 }
 
+function onLogin_(arg)
+{
+   return true;
+}
+
+function onNick_(arg)
+{
+   return true;
+}
+
+function loginForm_(event,arg)
+{
+    return true;
+}
+
 // -EVENT_STUBS
 function stop_p_(event)
 {
@@ -72,6 +87,9 @@ function init_()
     if (form_check !== undefined)
     {
         remove_cookie("PHPSESSID")
+        onLogin = onLogin_;
+        onNick = onNick_;
+        loginForm = loginForm_;
     }
 
     // Check for question string
