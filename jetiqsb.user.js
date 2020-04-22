@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         jetiq_soset_bibu
 // @namespace    http://tampermonkey.net/
-// @version      0.2.8
+// @version      0.2.9
 // @description  try to take over the world!
 // @author       You
 // @match        *://test.vntu.edu.ua/*
@@ -82,14 +82,16 @@ function return_true_(event)
 // -INITIALIZATION
 function init_()
 {
-    // Delete session cookie
+    // Check for form
     let form_check = document.getElementsByName("regfrm")[0];
     if (form_check !== undefined)
     {
-        remove_cookie("PHPSESSID")
+        // Substitute functions that mutate form to enable autofill
         onLogin = onLogin_;
         onNick = onNick_;
         loginForm = loginForm_;
+        // Delete session cookie
+        remove_cookie("PHPSESSID")
     }
 
     // Check for question string
