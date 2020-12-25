@@ -99,6 +99,13 @@ function init_()
     if (check === undefined)
         return;
 
+    // display go button immediately
+    let gobtn = document.getElementById('gobtn');
+    if(check !== undefined)
+    {
+        gobtn.style.display='block';
+    }
+
     // Compute values for substitutes
     prepare_for_subst_()
 
