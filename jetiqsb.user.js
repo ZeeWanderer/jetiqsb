@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         jetiq_soset_bibu
 // @namespace    http://tampermonkey.net/
-// @version      0.2.10
+// @version      0.2.11
 // @description  try to take over the world!
 // @author       You
 // @match        *://test.vntu.edu.ua/*
@@ -83,16 +83,16 @@ function return_true_(event)
 function init_()
 {
     // Check for form
-    let form_check = document.getElementsByName("regfrm")[0];
-    if (form_check !== undefined)
-    {
-        // Substitute functions that mutate form to enable autofill
-        onLogin = onLogin_;
-        onNick = onNick_;
-        loginForm = loginForm_;
-        // Delete session cookie
-        remove_cookie("PHPSESSID")
-    }
+    // let form_check = document.getElementsByName("regfrm")[0];
+    // if (form_check !== undefined)
+    // {
+    //     // Substitute functions that mutate form to enable autofill
+    //     onLogin = onLogin_;
+    //     onNick = onNick_;
+    //     loginForm = loginForm_;
+    //     // Delete session cookie
+    //     remove_cookie("PHPSESSID")
+    // }
 
     // Check for question string
     let check = document.getElementsByClassName("b3")[0];
@@ -103,7 +103,7 @@ function init_()
     let gobtn = document.getElementById('gobtn');
     if(check !== undefined)
     {
-        gobtn.style.display='block';
+        gobtn.style.display = 'block';
     }
 
     // Compute values for substitutes
