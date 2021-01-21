@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         jetiq_soset_bibu
 // @namespace    http://tampermonkey.net/
-// @version      0.2.12
+// @version      0.2.13
 // @description  try to take over the world!
 // @author       You
 // @match        *://test.vntu.edu.ua/*
@@ -67,19 +67,6 @@ function loginForm_(event, arg)
     return true;
 }
 
-function keyboard_events(event)
-{
-    if (event.isComposing || event.keyCode === 229)
-    {
-        return;
-    }
-
-    if (event.keyCode === 13) // enter key
-    {
-        go(); // submit answaer
-    }
-}
-
 // -EVENT_STUBS
 function stop_p_(event)
 {
@@ -90,6 +77,24 @@ function return_true_(event)
 {
     event.stopPropagation();
     return true
+}
+
+// -CUSTOM_EVENTS
+
+// Using functions inlined in page HTML code
+// function go();
+
+function keyboard_events(event)
+{
+    if (event.isComposing || event.keyCode === 229)
+    {
+        return;
+    }
+
+    if (event.keyCode === 13) // Enter keyDown
+    {
+        go(); // submit answer
+    }
 }
 
 // -INITIALIZATION
