@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         jetiq_soset_bibu
 // @namespace    http://tampermonkey.net/
-// @version      0.2.11
+// @version      0.2.12
 // @description  try to take over the world!
 // @author       You
 // @match        *://test.vntu.edu.ua/*
@@ -54,17 +54,30 @@ function SecondsPast_()
 
 function onLogin_(arg)
 {
-   return true;
+    return true;
 }
 
 function onNick_(arg)
 {
-   return true;
+    return true;
 }
 
-function loginForm_(event,arg)
+function loginForm_(event, arg)
 {
     return true;
+}
+
+function keyboard_events(event)
+{
+    if (event.isComposing || event.keyCode === 229)
+    {
+        return;
+    }
+
+    if (event.keyCode === 13) // enter key
+    {
+        go(); // submit answaer
+    }
 }
 
 // -EVENT_STUBS
@@ -101,7 +114,7 @@ function init_()
 
     // display go button immediately
     let gobtn = document.getElementById('gobtn');
-    if(check !== undefined)
+    if (check !== undefined)
     {
         gobtn.style.display = 'block';
     }
@@ -118,6 +131,7 @@ function init_()
     window.addEventListener('paste', return_true_, true)
     window.addEventListener('copy', return_true_, true)
     window.addEventListener('visibilitychange', stop_p_, true);
+    window.addEventListener("keydown", keyboard_events, true);
 }
 
 // -ENTRY_POINT
