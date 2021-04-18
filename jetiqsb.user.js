@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         jetiq_soset_bibu
 // @namespace    http://tampermonkey.net/
-// @version      0.2.13
+// @version      0.3.0
 // @description  try to take over the world!
 // @author       You
 // @match        *://test.vntu.edu.ua/*
@@ -79,10 +79,59 @@ function return_true_(event)
     return true
 }
 
+// - CUSTOM_VAIABLES
+var codepoint_map = {};
+
 // -CUSTOM_EVENTS
 
 // Using functions inlined in page HTML code
 // function go();
+
+function copy_event_(e)
+{
+    let cwords = [];
+    const text = window.getSelection().toString();
+    const words = text.split(" ");
+    for (let word_idx in words)
+    {
+        const word = words[word_idx];
+        let code_points = [];
+        for (let idx in word)
+        {
+            let char = word[idx];
+            code_points.push(char.codePointAt());
+        }
+        window.console.log(word,": ", code_points);
+        let b_is_cyrrilic = code_points.filter(code => code >= 1000).length != 0;
+        if (b_is_cyrrilic)
+        {
+            window.console.log("word: ", word, " contains cyrrilic");
+            let c_code_points = code_points.map(code => {
+                let mapped = codepoint_map[code];
+                if (mapped)
+                {
+                    return mapped;
+                }
+                else
+                {
+                    return code;
+                }
+            })
+            window.console.log(word," mapped to ", c_code_points);
+            let c_word = String.fromCodePoint(...c_code_points)
+            cwords.push(c_word);
+        }
+        else
+        {
+            cwords.push(word);
+        }
+
+    }
+    let ctext = words.join(" ");
+    e.clipboardData.setData('text/plain', ctext);
+    e.preventDefault();
+    return true;
+}
 
 function keyboard_events(event)
 {
@@ -98,6 +147,15 @@ function keyboard_events(event)
 }
 
 // -INITIALIZATION
+
+function init_codepoint_map()
+{
+    codepoint_map[105] = 1110; // i
+    codepoint_map[97] = 1072; // a
+    codepoint_map[112] = 1088; // p
+    codepoint_map[99] = 1089; // c
+}
+
 function init_()
 {
     // Check for form
@@ -131,10 +189,12 @@ function init_()
     SecondPast = SecondsPast_;
     not_dupl = not_dupl_;
 
+    init_codepoint_map()
+
     // Stop propagation of events
     window.addEventListener('cut', return_true_, true)
     window.addEventListener('paste', return_true_, true)
-    window.addEventListener('copy', return_true_, true)
+    window.addEventListener('copy', copy_event_, true)
     window.addEventListener('visibilitychange', stop_p_, true);
     window.addEventListener("keydown", keyboard_events, true);
 }
