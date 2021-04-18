@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         jetiq_soset_bibu
 // @namespace    http://tampermonkey.net/
-// @version      0.3.2
+// @version      0.3.3
 // @description  try to take over the world!
 // @author       You
 // @match        *://test.vntu.edu.ua/*
@@ -90,7 +90,7 @@ var codepoint_map = {};
 function copy_event_(e)
 {
     let cwords = [];
-    const text = window.getSelection().toString();
+    const text = window.getSelection().toString().replace(/\s+/g, ' ');
     const words = text.split(" ");
     for (let word_idx in words)
     {
