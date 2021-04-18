@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         jetiq_soset_bibu
 // @namespace    http://tampermonkey.net/
-// @version      0.3.0
+// @version      0.3.1
 // @description  try to take over the world!
 // @author       You
 // @match        *://test.vntu.edu.ua/*
@@ -79,7 +79,7 @@ function return_true_(event)
     return true
 }
 
-// - CUSTOM_VAIABLES
+// -CUSTOM_VAIABLES
 var codepoint_map = {};
 
 // -CUSTOM_EVENTS
@@ -127,7 +127,7 @@ function copy_event_(e)
         }
 
     }
-    let ctext = words.join(" ");
+    let ctext = cwords.join(" ");
     e.clipboardData.setData('text/plain', ctext);
     e.preventDefault();
     return true;
@@ -154,6 +154,7 @@ function init_codepoint_map()
     codepoint_map[97] = 1072; // a
     codepoint_map[112] = 1088; // p
     codepoint_map[99] = 1089; // c
+    codepoint_map[101] = 1077; // e
 }
 
 function init_()
