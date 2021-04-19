@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         jetiq_soset_bibu
 // @namespace    http://tampermonkey.net/
-// @version      0.3.4
+// @version      0.3.5
 // @description  try to take over the world!
 // @author       You
 // @match        *://test.vntu.edu.ua/*
@@ -150,13 +150,22 @@ function keyboard_events(event)
 
 function init_codepoint_map()
 {
+    codepoint_map[65] = 1040; // A
+    codepoint_map[67] = 1057; // C
+    codepoint_map[69] = 1045; // E
+    codepoint_map[73] = 1030; // I
+    codepoint_map[79] = 1054; // O
+    codepoint_map[80] = 1056; // P
+    codepoint_map[88] = 1061; // X
+
+
     codepoint_map[97] = 1072; // a
     codepoint_map[99] = 1089; // c
-    codepoint_map[105] = 1110; // i
     codepoint_map[101] = 1077; // e
+    codepoint_map[105] = 1110; // i
     codepoint_map[111] = 1086; // o
     codepoint_map[112] = 1088; // p
-    codepoint_map[120] = 1093; // p
+    codepoint_map[120] = 1093; // x
 }
 
 function init_()
