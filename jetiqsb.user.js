@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         jetiq_soset_bibu
 // @namespace    http://tampermonkey.net/
-// @version      0.3.6
+// @version      0.3.7
 // @description  try to take over the world!
 // @author       You
 // @match        *://test.vntu.edu.ua/*
@@ -103,9 +103,10 @@ function copy_event_(e)
         }
         window.console.log(word,": ", code_points);
         let b_is_cyrrilic = code_points.filter(code => code >= 1000).length != 0;
-        if (b_is_cyrrilic)
+        let b_is_small_word = code_points.length <= 5;
+        if (b_is_cyrrilic || b_is_small_word)
         {
-            window.console.log("word: ", word, " contains cyrrilic");
+            window.console.log("word: ", word, " contains cyrrilic or is less than 6 in length");
             let c_code_points = code_points.map(code => {
                 let mapped = codepoint_map[code];
                 if (mapped)
